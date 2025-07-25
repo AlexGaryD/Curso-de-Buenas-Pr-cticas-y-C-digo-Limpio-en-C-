@@ -53,22 +53,27 @@ namespace ToDo
                 Console.WriteLine("Ingrese el número de la tarea a remover: ");
                 // Show current taks
                 ShowMenuTaskList(); // Mostrar tareas pendientes
-            
-
 
                 string selectedOption = Console.ReadLine();
                 // Remove one position
                 int indexToRemove = Convert.ToInt32(selectedOption) - 1;
-                if (indexToRemove > -1 && TaskList.Count > 0) // Verificar que el índice sea válido
+                // Validar que el índice ingresado sea válido
+                if(indexToRemove > (TaskList.Count - 1) ||  indexToRemove < 0)
+                    Console.WriteLine("El número ingresado es inválido. Por favor, ingrese un número válido.");
+                else
                 {
-                        string taskDescription = TaskList[indexToRemove];
-                        TaskList.RemoveAt(indexToRemove);
-                        Console.WriteLine("Tarea " + taskDescription + " eliminada");
-                    
-                }
+                    if (indexToRemove > -1 && TaskList.Count > 0) // Verificar que el índice sea válido
+                    {
+                            string taskDescription = TaskList[indexToRemove];
+                            TaskList.RemoveAt(indexToRemove);
+                            Console.WriteLine("Tarea " + taskDescription + " eliminada");
+                    }
+                } 
+                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine("Error al eliminar la tarea. Asegúrese de ingresar un número válido.");
             }
         }
 
